@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SearchPost;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(5);
+        dd(SearchPost::dispatch($request->input('query')));
+        // dd($posts->results());
+        // ->fragment('users')
+        // $posts->withPath('/admin/users');
+        // ->withQueryString()
+        $posts =
+            Post::search($request->input('query'))->simplePaginate(5);
         return view('welcome', compact('posts'));
     }
 

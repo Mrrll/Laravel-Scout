@@ -17,8 +17,11 @@
                         <td>{{ $post->description }}</td>
                     </tr>
                 @empty
-                    <tr>No hay registros
-                        <tr />
+                    <tr>
+
+                        No hay registros
+
+                    </tr>
                 @endforelse
             </tbody>
         </table>
